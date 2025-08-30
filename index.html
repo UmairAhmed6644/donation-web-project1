@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umidonation - Donate with Heart, Share with Purpose</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: linear-gradient(135deg, #000000 0%, #1a0000 50%, #000000 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #dc2626 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="60" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(45deg, #ffffff, #ffcccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(220, 38, 38, 0.6);
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.3);
+            border-color: rgba(220, 38, 38, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 1.1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #dc2626;
+            box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-6 { margin-top: 1.5rem; }
+        .mt-8 { margin-top: 2rem; }
+        .p-6 { padding: 1.5rem; }
+        .p-8 { padding: 2rem; }
+
+        .home-page {
+            padding: 3rem 0;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero-section h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .categories-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .categories-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .category-card {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .category-card .card {
+            display: flex;
+            align-items: center;
+            padding: 2rem;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(185, 28, 28, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-card .card:hover::before {
+            opacity: 1;
+        }
+
+        .category-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 2rem;
+            font-size: 2.5rem;
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .blood-icon { 
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+        .money-icon { 
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+        .clothes-icon { 
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+        .other-icon { 
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .category-content {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-content p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .category-content .btn {
+            align-self: flex-end;
+        }
+
+        .impact-section {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1.5rem;
+            padding: 3rem 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .impact-section h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem;
+            background: rgba(220, 38, 38, 0.1);
+            border-radius: 1rem;
+            border: 1px solid rgba(220, 38, 38, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #dc2626;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        .donation-page {
+            padding: 2rem 0;
+            display: none;
+        }
+
+        .page-header {
+            margin-bottom: 3rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .back-link:hover {
+            color: #dc2626;
+            background: rgba(220, 38, 38, 0.1);
+            transform: translateX(-5px);
+        }
+
+        .donation-hero {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .donation-icon {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto 2rem;
+            box-shadow: 0 12px 40px rgba(220, 38, 38, 0.4);
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            border: 4px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .donation-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .donation-description {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .donation-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .donation-info h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .info-card .info-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-card h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+        }
+
+        .donation-form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .donation-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .donation-form textarea.form-input {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .donation-form .btn {
+            width: 100%;
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            padding: 1.2rem 1.5rem;
+        }
+
+        .success-message {
+            text-align: center;
+            max-width: 600px;
+            margin: 4rem auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-message h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .success-message p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .logo h1 { font-size: 2.5rem; }
+            .logo p { font-size: 1.1rem; }
+            .hero-section h2 { font-size: 2.5rem; }
+            .hero-section p { font-size: 1.1rem; }
+            .category-card .card { flex-direction: column; text-align: center; }
+            .category-icon { margin-right: 0; margin-bottom: 1rem; }
+            .impact-stats { grid-template-columns: 1fr; gap: 1.5rem; }
+            .donation-content { grid-template-columns: 1fr; gap: 2rem; }
+            .donation-hero h1 { font-size: 2.5rem; }
+            .donation-description { font-size: 1.1rem; }
+            .donation-icon { width: 120px; height: 120px; font-size: 3rem; }
+            .donation-form { padding: 1.5rem; }
+            .container { padding: 0 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo" onclick="showHome()">
+                <h1>Umidonation</h1>
+                <p>Donate with Heart, Share with Purpose</p>
+            </a>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <main id="home-page" class="home-page">
+        <div class="container">
+            <div class="hero-section">
+                <h2>Choose How You Want to Help</h2>
+                <p>Every donation makes a difference. Select a category below to get started.</p>
+            </div>
+            
+            <div class="categories-container">
+                <div class="categories-list">
+                    <div class="category-card" onclick="showDonationPage('blood')">
+                        <div class="card">
+                            <div class="category-icon blood-icon">🩸</div>
+                            <div class="category-content">
+                                <h3>Blood Donation</h3>
+                                <p>Save lives with your blood donation. Your blood can save patients' lives and carries immense humanitarian and religious value.</p>
+                                <button class="btn btn-primary">Donate Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category-card" onclick="showDonationPage('money')">
+                        <div class="card">
+                            <div class="category-icon money-icon">💰</div>
+                            <div class="category-content">
+                                <h3>Money Donation</h3>
+                                <p>Support those in need financially. Contribute funds that will directly support those in need - secure, transparent, and impactful.</p>
+                                <button class="btn btn-primary">Donate Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category-card" onclick="showDonationPage('clothes')">
+                        <div class="card">
+                            <div class="category-icon clothes-icon">👕</div>
+                            <div class="category-content">
+                                <h3>Used Clothes</h3>
+                                <p>Give comfort through clothing. Pass on gently used clothes to bring comfort and dignity to someone's life.</p>
+                                <button class="btn btn-primary">Donate Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category-card" onclick="showDonationPage('other')">
+                        <div class="card">
+                            <div class="category-icon other-icon">📦</div>
+                            <div class="category-content">
+                                <h3>Other Donations</h3>
+                                <p>Food, books, and essential items. Give items like food, books, or essentials that can bring relief and joy.</p>
+                                <button class="btn btn-primary">Donate Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="impact-section">
+                <h3>Your Impact Matters</h3>
+                <div class="impact-stats">
+                    <div class="stat">
+                        <span class="stat-number">1,234</span>
+                        <span class="stat-label">Lives Saved</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">5,678</span>
+                        <span class="stat-label">People Helped</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">9,012</span>
+                        <span class="stat-label">Donations Made</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Blood Donation Page -->
+    <div id="blood-page" class="donation-page">
+        <div class="container">
+            <div class="page-header">
+                <div class="back-link" onclick="showHome()">← Back to Categories</div>
+                <div class="donation-hero">
+                    <div class="donation-icon blood-icon">🩸</div>
+                    <h1>Blood Donation</h1>
+                    <p class="donation-description">
+                        Your blood can save patients' lives. Enter your details to register as a donor. 
+                        This act carries immense humanitarian and religious value.
+                    </p>
+                </div>
+            </div>
+
+            <div class="donation-content">
+                <div class="donation-info">
+                    <h3>Why Blood Donation Matters</h3>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <div class="info-icon">❤️</div>
+                            <h4>Save Lives</h4>
+                            <p>One donation can save up to 3 lives</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">🏥</div>
+                            <h4>Medical Emergencies</h4>
+                            <p>Critical for surgeries and trauma care</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">🔄</div>
+                            <h4>Regular Need</h4>
+                            <p>Blood is needed every 2 seconds</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donation-form-container">
+                    <form class="donation-form" onsubmit="handleSubmit(event, 'Blood Donation')">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name *</label>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact" class="form-label">Contact Number *</label>
+                            <input type="tel" id="contact" name="contact" class="form-input" placeholder="Enter your phone number" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location" class="form-label">Location *</label>
+                            <input type="text" id="location" name="location" class="form-input" placeholder="Enter your city/location" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="additionalInfo" class="form-label">Additional Information</label>
+                            <textarea id="additionalInfo" name="additionalInfo" class="form-input" placeholder="Any additional details about your donation..." rows="4"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit Donation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Money Donation Page -->
+    <div id="money-page" class="donation-page">
+        <div class="container">
+            <div class="page-header">
+                <div class="back-link" onclick="showHome()">← Back to Categories</div>
+                <div class="donation-hero">
+                    <div class="donation-icon money-icon">💰</div>
+                    <h1>Money Donation</h1>
+                    <p class="donation-description">
+                        Contribute funds that will directly support those in need. 
+                        Secure, transparent, and impactful.
+                    </p>
+                </div>
+            </div>
+
+            <div class="donation-content">
+                <div class="donation-info">
+                    <h3>How Your Money Helps</h3>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <div class="info-icon">🏠</div>
+                            <h4>Shelter</h4>
+                            <p>Provide housing for homeless families</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">🍽️</div>
+                            <h4>Food Security</h4>
+                            <p>Ensure meals for those in need</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">📚</div>
+                            <h4>Education</h4>
+                            <p>Support children's education</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donation-form-container">
+                    <form class="donation-form" onsubmit="handleSubmit(event, 'Money Donation')">
+                        <div class="form-group">
+                            <label for="money-name" class="form-label">Full Name *</label>
+                            <input type="text" id="money-name" name="name" class="form-input" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="money-contact" class="form-label">Contact Number *</label>
+                            <input type="tel" id="money-contact" name="contact" class="form-input" placeholder="Enter your phone number" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="money-location" class="form-label">Location *</label>
+                            <input type="text" id="money-location" name="location" class="form-input" placeholder="Enter your city/location" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="money-additionalInfo" class="form-label">Additional Information</label>
+                            <textarea id="money-additionalInfo" name="additionalInfo" class="form-input" placeholder="Any additional details about your donation..." rows="4"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit Donation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clothes Donation Page -->
+    <div id="clothes-page" class="donation-page">
+        <div class="container">
+            <div class="page-header">
+                <div class="back-link" onclick="showHome()">← Back to Categories</div>
+                <div class="donation-hero">
+                    <div class="donation-icon clothes-icon">👕</div>
+                    <h1>Used Clothes Donation</h1>
+                    <p class="donation-description">
+                        Pass on gently used clothes to bring comfort and dignity to someone's life.
+                    </p>
+                </div>
+            </div>
+
+            <div class="donation-content">
+                <div class="donation-info">
+                    <h3>What We Accept</h3>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <div class="info-icon">👔</div>
+                            <h4>Professional Wear</h4>
+                            <p>Business attire for job interviews</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">👶</div>
+                            <h4>Children's Clothes</h4>
+                            <p>Clean, gently used kids clothing</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">🧥</div>
+                            <h4>Winter Wear</h4>
+                            <p>Coats, jackets, and warm clothing</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donation-form-container">
+                    <form class="donation-form" onsubmit="handleSubmit(event, 'Used Clothes')">
+                        <div class="form-group">
+                            <label for="clothes-name" class="form-label">Full Name *</label>
+                            <input type="text" id="clothes-name" name="name" class="form-input" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="clothes-contact" class="form-label">Contact Number *</label>
+                            <input type="tel" id="clothes-contact" name="contact" class="form-input" placeholder="Enter your phone number" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="clothes-location" class="form-label">Location *</label>
+                            <input type="text" id="clothes-location" name="location" class="form-input" placeholder="Enter your city/location" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="clothes-additionalInfo" class="form-label">Additional Information</label>
+                            <textarea id="clothes-additionalInfo" name="additionalInfo" class="form-input" placeholder="Any additional details about your donation..." rows="4"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit Donation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Other Donations Page -->
+    <div id="other-page" class="donation-page">
+        <div class="container">
+            <div class="page-header">
+                <div class="back-link" onclick="showHome()">← Back to Categories</div>
+                <div class="donation-hero">
+                    <div class="donation-icon other-icon">📦</div>
+                    <h1>Other Donations</h1>
+                    <p class="donation-description">
+                        Give items like food, books, or essentials that can bring relief and joy.
+                    </p>
+                </div>
+            </div>
+
+            <div class="donation-content">
+                <div class="donation-info">
+                    <h3>What You Can Donate</h3>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <div class="info-icon">📚</div>
+                            <h4>Books</h4>
+                            <p>Educational books and reading materials</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">🍎</div>
+                            <h4>Food Items</h4>
+                            <p>Non-perishable food and essentials</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">🧸</div>
+                            <h4>Toys</h4>
+                            <p>Gently used toys for children</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donation-form-container">
+                    <form class="donation-form" onsubmit="handleSubmit(event, 'Other Donations')">
+                        <div class="form-group">
+                            <label for="other-name" class="form-label">Full Name *</label>
+                            <input type="text" id="other-name" name="name" class="form-input" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="other-contact" class="form-label">Contact Number *</label>
+                            <input type="tel" id="other-contact" name="contact" class="form-input" placeholder="Enter your phone number" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="other-location" class="form-label">Location *</label>
+                            <input type="text" id="other-location" name="location" class="form-input" placeholder="Enter your city/location" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="other-additionalInfo" class="form-label">Additional Information</label>
+                            <textarea id="other-additionalInfo" name="additionalInfo" class="form-input" placeholder="Any additional details about your donation..." rows="4"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit Donation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="success-message" class="success-message">
+        <div class="success-icon">✅</div>
+        <h2 id="success-title">Thank You for Your Donation!</h2>
+        <p id="success-description">Your donation request has been submitted successfully. We will contact you soon to arrange the process.</p>
+        <p id="success-impact">Your contribution will make a real difference in someone's life.</p>
+        <button class="btn btn-primary" onclick="showHome()">Back to Home</button>
+    </div>
+
+    <script>
+        function showHome() {
+            document.getElementById('home-page').style.display = 'block';
+            document.getElementById('blood-page').style.display = 'none';
+            document.getElementById('money-page').style.display = 'none';
+            document.getElementById('clothes-page').style.display = 'none';
+            document.getElementById('other-page').style.display = 'none';
+            document.getElementById('success-message').style.display = 'none';
+        }
+
+        function showDonationPage(type) {
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('blood-page').style.display = 'none';
+            document.getElementById('money-page').style.display = 'none';
+            document.getElementById('clothes-page').style.display = 'none';
+            document.getElementById('other-page').style.display = 'none';
+            document.getElementById('success-message').style.display = 'none';
+
+            document.getElementById(type + '-page').style.display = 'block';
+        }
+
+        function handleSubmit(event, donationType) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                name: formData.get('name'),
+                contact: formData.get('contact'),
+                location: formData.get('location'),
+                additionalInfo: formData.get('additionalInfo'),
+                donationType: donationType
+            };
+
+            console.log('Donation submitted:', data);
+
+            // Show success message
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('blood-page').style.display = 'none';
+            document.getElementById('money-page').style.display = 'none';
+            document.getElementById('clothes-page').style.display = 'none';
+            document.getElementById('other-page').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+
+            // Update success message based on donation type
+            const successTitle = document.getElementById('success-title');
+            const successDescription = document.getElementById('success-description');
+            const successImpact = document.getElementById('success-impact');
+
+            switch(donationType) {
+                case 'Blood Donation':
+                    successTitle.textContent = 'Thank You for Your Blood Donation!';
+                    successDescription.textContent = 'Your registration has been submitted successfully. We will contact you soon to arrange the donation process.';
+                    successImpact.textContent = 'Your blood can save patients\' lives. This act carries immense humanitarian and religious value.';
+                    break;
+                case 'Money Donation':
+                    successTitle.textContent = 'Thank You for Your Financial Donation!';
+                    successDescription.textContent = 'Your donation request has been submitted successfully. We will contact you soon to arrange the contribution.';
+                    successImpact.textContent = 'Your funds will directly support those in need. Secure, transparent, and impactful.';
+                    break;
+                case 'Used Clothes':
+                    successTitle.textContent = 'Thank You for Your Clothes Donation!';
+                    successDescription.textContent = 'Your donation request has been submitted successfully. We will contact you soon to arrange pickup.';
+                    successImpact.textContent = 'Your gently used clothes will bring comfort and dignity to someone\'s life.';
+                    break;
+                case 'Other Donations':
+                    successTitle.textContent = 'Thank You for Your Donation!';
+                    successDescription.textContent = 'Your donation request has been submitted successfully. We will contact you soon to arrange pickup.';
+                    successImpact.textContent = 'Your items will bring relief and joy to those in need.';
+                    break;
+            }
+
+            // Reset form
+            event.target.reset();
+        }
+    </script>
+</body>
+</html> 
